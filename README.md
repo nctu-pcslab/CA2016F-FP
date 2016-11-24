@@ -64,6 +64,7 @@ The program under this directory can show the device information
 * Performance Rank (30%)
     * We will rank your CUDA kernels’ performance on GTX 680
     * The fastest one will get 30 points and the last one will get 1 points for this part
+* Delay is not acceptable!
 
 ## Other Rules
 * It’s team work, 1 ~ 3 people in one team
