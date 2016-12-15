@@ -77,6 +77,7 @@ int main()
 {
 	int convLayerCPUExecTime, convLayerGPUExecTime;
 	init();
+	initCoo();
 		
 	timespec time_begin, time_end;                                                 
   clock_gettime(CLOCK_REALTIME, &time_begin);

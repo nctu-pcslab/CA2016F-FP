@@ -19,6 +19,16 @@ int *outNeu;
 int *outCPU;
 int *outGPU;
 
+short *filtCooNNZ;
+short *filtCooData;
+char *filtCooRow;
+char *filtCooCol;
+
+short *inNeuCooNNZ;
+short *inNeuCooData;
+char *inNeuCooRow;
+char *inNeuCooCol;
+
 void init()
 {
 	int i, j, k, l;
@@ -77,6 +87,91 @@ void init()
 	outGPU = new int [outVol]();
 }
 
+void initCoo()
+{
+	int i, j, k, idx;
+	short tmp, nnz;
+	string str;
+	
+	fstream ifs;
+
+	filtCooNNZ = new short [FILTNUM*FMDEPTH];
+
+	ifs.open("data/filt.coo", ifstream::in);
+	if(!ifs.is_open()){
+		cout << "Can not open the filters input file\n";
+		exit(-1);
+	}
+	for(i = 0; i < FILTNUM; i++){
+		ifs >> str; 
+		for(j = 0; j < FMDEPTH; j++){
+			ifs >> str; 
+			ifs >> str >> nnz; 
+			filtCooNNZ[idx] = nnz;
+			if(i == 0){
+				filtCooData = new short [FILTNUM*FMDEPTH*nnz];
+				filtCooRow = new char [FILTNUM*FMDEPTH*nnz];
+				filtCooCol = new char [FILTNUM*FMDEPTH*nnz];
+			}
+
+			for(k = 0; k < nnz; k++){
+				ifs >> str >> tmp;
+				idx = i*FMDEPTH + j*nnz + k;
+				filtCooData[idx] = tmp;
+			}
+			for(k = 0; k < nnz; k++){
+				ifs >> str >> tmp;
+				idx = i*FMDEPTH + j*nnz + k;
+				filtCooRow[idx] = (char) tmp;
+			}
+			for(k = 0; k < nnz; k++){
+				ifs >> str >> tmp;
+				idx = i*FMDEPTH + j*nnz + k;
+				filtCooCol[idx] = (char) tmp;
+			}
+		}
+	}
+	ifs.close();
+
+	inNeuCooNNZ = new short [FMDEPTH];
+
+	ifs.open("data/inNeu.coo", ifstream::in);
+	if(!ifs.is_open()){
+		cout << "Can not open the neurons input file\n";
+		exit(-1);
+	}
+	for(i = 0; i < FMDEPTH; i++){
+		ifs >> str; 
+		ifs >> str >> nnz; 
+		inNeuCooNNZ[i] = nnz;
+		if(i == 0){
+			inNeuCooData = new short [FMDEPTH*nnz];
+			inNeuCooRow = new char [FMDEPTH*nnz];
+			inNeuCooCol = new char [FMDEPTH*nnz];
+		}
+
+		ifs >> str;
+		for(j = 0; j < nnz; j++){
+			ifs >> tmp;
+			idx = i*nnz + j;
+			inNeuCooData[idx] = tmp;
+		}
+		ifs >> str;
+		for(j = 0; j < nnz; j++){
+			ifs >> tmp;
+			idx = i*nnz + j;
+			inNeuCooRow[idx] = (char) tmp;
+		}
+		ifs >> str;
+		for(j = 0; j < nnz; j++){
+			ifs >> tmp;
+			idx = i*nnz + j;
+			inNeuCooCol[idx] = (char) tmp;
+		}
+	}
+	ifs.close();
+}
+
 void ending()
 {
 	delete [] filt;
@@ -84,6 +179,16 @@ void ending()
 	delete [] outNeu;
 	delete [] outCPU;
 	delete [] outGPU;
+
+	delete [] filtCooNNZ;
+	delete [] filtCooData;
+	delete [] filtCooRow;
+	delete [] filtCooCol;
+
+	delete [] inNeuCooNNZ;
+	delete [] inNeuCooData;
+	delete [] inNeuCooRow;
+	delete [] inNeuCooCol;
 }
 
 bool checker(){
