@@ -16,8 +16,7 @@ int main() {
 		printf("MaxThreadsDim [x]: %d [y]: %d [z]: %d\n", 
 					prop.maxThreadsDim[0], prop.maxThreadsDim[1], prop.maxThreadsDim[2]);
 		printf("MaxGridSize [x]: %d [y]: %d [z]: %d\n", 
-					prop.maxThreadsDim[0], prop.maxThreadsDim[1], prop.maxThreadsDim[2]);
+					prop.maxGridSize[0], prop.maxGridSize[1], prop.maxGridSize[2]);
 		printf("MultiProcessorCount: %d\n", prop.multiProcessorCount);
-		printf("MaxThreadsPerMultiProcessor: %d\n", prop.maxThreadsPerMultiProcessor);
   }
 }
