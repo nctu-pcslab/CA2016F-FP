@@ -56,23 +56,21 @@ The program under this directory can show the device information
         TotalExecTime = GPUKernelsExecTime + DataTransTime
         
 ## Grading Policy
-* Completeness (20%)
+* Completeness (30%)
     * Your result is correct (Pass the check) - 5%
     * You get speedup compared to convLayerCPU() - 5%
     * You use NVIDIA Visual Profiler (NVVP) to help you - 5%
     * You utilize the sparsity in either Neurons or Filters - 5%
-* Report (30%)
-    * Describe your implementation algorithm and explain your results - 5%
-    * Show how you use NVVP to help you find and solve perf. issues - 5%
-    * Discussions on the optimizations you do - 10%
+    * Improve the input data format (like using other sparse format rather than COO) - 10%
+* Performance Ranking (30%)
+    * TA will rank your TotalExecTime on the provided server
+    * The fastest one will get 30% and the last one will get 1%
+* Report (40%)
+    * Description of your implementation and results - 5%
+    * Show how NVVP help you find and solve perf. issues - 5%
+    * Discussion on your optimizations and innovations - 20%
     * Comparison between part-I - 5%
     * Feedback of this project - 5%
-* Customization (Also describe and discuss in your report) (30%)
-    * Optimized your CUDA kernels for the sparse format - 20%
-    * Improve the input data format (like using other sparse format rather than COO) - 10%
-* Performance Ranking (20%)
-    * TA will rank your TotalExecTime on the provided server
-    * The fastest one will get 20% and the last one will get 1%
 
 ## Other Rules
 * It’s team work, 1 ~ 3 people in one team
