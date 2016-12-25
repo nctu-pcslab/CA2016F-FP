@@ -21,13 +21,13 @@ int *outGPU;
 
 short *filtCooNNZ;
 short *filtCooData;
-char *filtCooRow;
-char *filtCooCol;
+short *filtCooRow;
+short *filtCooCol;
 
 short *inNeuCooNNZ;
 short *inNeuCooData;
-char *inNeuCooRow;
-char *inNeuCooCol;
+short *inNeuCooRow;
+short *inNeuCooCol;
 
 void init()
 {
@@ -110,8 +110,8 @@ void initCoo()
 			filtCooNNZ[idx] = nnz;
 			if(i == 0){
 				filtCooData = new short [FILTNUM*FMDEPTH*nnz];
-				filtCooRow = new char [FILTNUM*FMDEPTH*nnz];
-				filtCooCol = new char [FILTNUM*FMDEPTH*nnz];
+				filtCooRow = new short [FILTNUM*FMDEPTH*nnz];
+				filtCooCol = new short [FILTNUM*FMDEPTH*nnz];
 			}
 
 			for(k = 0; k < nnz; k++){
@@ -122,12 +122,12 @@ void initCoo()
 			for(k = 0; k < nnz; k++){
 				ifs >> str >> tmp;
 				idx = i*FMDEPTH + j*nnz + k;
-				filtCooRow[idx] = (char) tmp;
+				filtCooRow[idx] = tmp;
 			}
 			for(k = 0; k < nnz; k++){
 				ifs >> str >> tmp;
 				idx = i*FMDEPTH + j*nnz + k;
-				filtCooCol[idx] = (char) tmp;
+				filtCooCol[idx] = tmp;
 			}
 		}
 	}
@@ -146,8 +146,8 @@ void initCoo()
 		inNeuCooNNZ[i] = nnz;
 		if(i == 0){
 			inNeuCooData = new short [FMDEPTH*nnz];
-			inNeuCooRow = new char [FMDEPTH*nnz];
-			inNeuCooCol = new char [FMDEPTH*nnz];
+			inNeuCooRow = new short [FMDEPTH*nnz];
+			inNeuCooCol = new short [FMDEPTH*nnz];
 		}
 
 		ifs >> str;
@@ -160,13 +160,13 @@ void initCoo()
 		for(j = 0; j < nnz; j++){
 			ifs >> tmp;
 			idx = i*nnz + j;
-			inNeuCooRow[idx] = (char) tmp;
+			inNeuCooRow[idx] = tmp;
 		}
 		ifs >> str;
 		for(j = 0; j < nnz; j++){
 			ifs >> tmp;
 			idx = i*nnz + j;
-			inNeuCooCol[idx] = (char) tmp;
+			inNeuCooCol[idx] = tmp;
 		}
 	}
 	ifs.close();
