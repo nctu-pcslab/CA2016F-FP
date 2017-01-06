@@ -108,7 +108,7 @@ void initCoo()
 			ifs >> str; 
 			ifs >> str >> nnz; 
 			filtCooNNZ[idx] = nnz;
-			if(i == 0){
+			if(i == 0 && j==0){
 				filtCooData = new short [FILTNUM*FMDEPTH*nnz];
 				filtCooRow = new short [FILTNUM*FMDEPTH*nnz];
 				filtCooCol = new short [FILTNUM*FMDEPTH*nnz];
