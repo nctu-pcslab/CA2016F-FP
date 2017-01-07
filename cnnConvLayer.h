@@ -107,26 +107,26 @@ void initCoo()
 		for(j = 0; j < FMDEPTH; j++){
 			ifs >> str; 
 			ifs >> str >> nnz; 
+			idx = i*FMDEPTH + j;
 			filtCooNNZ[idx] = nnz;
 			if(i == 0 && j==0){
 				filtCooData = new short [FILTNUM*FMDEPTH*nnz];
 				filtCooRow = new short [FILTNUM*FMDEPTH*nnz];
 				filtCooCol = new short [FILTNUM*FMDEPTH*nnz];
 			}
-
 			for(k = 0; k < nnz; k++){
 				ifs >> str >> tmp;
-				idx = i*FMDEPTH + j*nnz + k;
+				idx = i*FMDEPTH*nnz + j*nnz + k;
 				filtCooData[idx] = tmp;
 			}
 			for(k = 0; k < nnz; k++){
 				ifs >> str >> tmp;
-				idx = i*FMDEPTH + j*nnz + k;
+				idx = i*FMDEPTH*nnz + j*nnz + k;
 				filtCooRow[idx] = tmp;
 			}
 			for(k = 0; k < nnz; k++){
 				ifs >> str >> tmp;
-				idx = i*FMDEPTH + j*nnz + k;
+				idx = i*FMDEPTH*nnz + j*nnz + k;
 				filtCooCol[idx] = tmp;
 			}
 		}
